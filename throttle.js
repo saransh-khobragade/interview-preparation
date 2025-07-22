@@ -14,6 +14,7 @@ function throttle(func, delay) {
         }
     };
 }
+
 // Method 2: Throttle with leading and trailing options
 function throttleAdvanced(func, delay, options = {}) {
     let lastCall = 0;
