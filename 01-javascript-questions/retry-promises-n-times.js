@@ -1,23 +1,13 @@
-// Retry Promises N Times
+/*
+Retry Promise N Times
+---------------------
+Given a function that returns a promise, retry it up to n times if it fails.
 
-function retry(fn, n, delay = 0) {
-    return new Promise((resolve, reject) => {
-        function attempt(count) {
-            fn()
-                .then(resolve)
-                .catch(err => {
-                    if (count > 0) {
-                        setTimeout(() => attempt(count - 1), delay);
-                    } else {
-                        reject(err);
-                    }
-                });
-        }
-        attempt(n);
-    });
+Approach: Use recursion to retry on failure.
+*/
+
+function retry(fn, n) {
+    return fn().catch(err => (n > 1 ? retry(fn, n - 1) : Promise.reject(err)));
 }
 
-// Usage:
-// retry(() => fetch('...'), 3, 1000)
-
-module.exports = { retry }; 
+module.exports = retry; 

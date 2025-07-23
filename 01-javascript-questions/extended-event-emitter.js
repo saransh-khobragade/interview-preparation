@@ -1,36 +1,34 @@
-// Extended EventEmitter with Priority and Async Support
+/*
+Extended EventEmitter
+---------------------
+Implements an event emitter with on, off, emit, and once methods.
 
-class ExtendedEventEmitter {
+Approach: Use a Map to store event listeners.
+*/
+
+class EventEmitter {
     constructor() {
-        this.events = {};
+        this.events = new Map();
     }
-    on(event, listener, priority = 0) {
-        if (!this.events[event]) this.events[event] = [];
-        this.events[event].push({ listener, priority });
-        this.events[event].sort((a, b) => b.priority - a.priority);
+    on(event, listener) {
+        if (!this.events.has(event)) this.events.set(event, []);
+        this.events.get(event).push(listener);
     }
     off(event, listener) {
-        if (!this.events[event]) return;
-        this.events[event] = this.events[event].filter(l => l.listener !== listener);
+        if (!this.events.has(event)) return;
+        this.events.set(event, this.events.get(event).filter(l => l !== listener));
     }
-    async emit(event, ...args) {
-        if (!this.events[event]) return;
-        for (const { listener } of this.events[event]) {
-            await listener(...args);
-        }
+    emit(event, ...args) {
+        if (!this.events.has(event)) return;
+        for (const listener of this.events.get(event)) listener(...args);
     }
-    once(event, listener, priority = 0) {
-        const wrapper = async (...args) => {
-            await listener(...args);
+    once(event, listener) {
+        const wrapper = (...args) => {
             this.off(event, wrapper);
+            listener(...args);
         };
-        this.on(event, wrapper, priority);
+        this.on(event, wrapper);
     }
 }
 
-// Usage:
-// const emitter = new ExtendedEventEmitter();
-// emitter.on('data', async (msg) => { await doSomething(msg); }, 10);
-// await emitter.emit('data', 'Hello!');
-
-module.exports = { ExtendedEventEmitter }; 
+module.exports = EventEmitter; 

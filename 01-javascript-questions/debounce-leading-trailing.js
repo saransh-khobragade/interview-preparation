@@ -1,36 +1,25 @@
-// Debounce with Leading and Trailing Options
-// Usage: debounce(fn, wait, { leading: true, trailing: false })
+/*
+Debounce with Leading and Trailing Options
+------------------------------------------
+Debounces a function, allowing control over whether it fires at the start (leading) and/or end (trailing) of the wait period.
 
-function debounce(fn, wait, options = {}) {
-    let timeout, lastArgs, lastThis, result, called;
-    const { leading = false, trailing = true } = options;
+Approach: Use a timer and flags for leading/trailing calls.
+*/
 
-    const invoke = () => {
-        if (trailing && lastArgs) {
-            result = fn.apply(lastThis, lastArgs);
-            lastArgs = lastThis = null;
-        }
-        timeout = null;
-    };
-
+function debounce(fn, delay, { leading = false, trailing = true } = {}) {
+    let timer, called = false;
     return function(...args) {
-        lastArgs = args;
-        lastThis = this;
-        if (!timeout) {
-            if (leading) {
-                result = fn.apply(this, args);
-                called = true;
-            }
-            timeout = setTimeout(invoke, wait);
-        } else {
-            clearTimeout(timeout);
-            timeout = setTimeout(invoke, wait);
+        if (leading && !timer && !called) {
+            fn.apply(this, args);
+            called = true;
         }
-        return result;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            if (trailing && (!leading || called)) fn.apply(this, args);
+            timer = null;
+            called = false;
+        }, delay);
     };
 }
 
-// Usage example:
-// const debounced = debounce(fn, 300, { leading: true, trailing: false });
-
-module.exports = { debounce }; 
+module.exports = debounce; 

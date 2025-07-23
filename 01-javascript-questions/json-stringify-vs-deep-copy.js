@@ -1,14 +1,13 @@
-// JSON.stringify vs Manual Deep Copy
+/*
+JSON.stringify vs Deep Copy
+---------------------------
+Demonstrates the difference between reference copy and deep copy using JSON methods.
 
-const { deepClone } = require('./deep-clone-object');
+Note: JSON methods do not handle functions, undefined, or circular references.
+*/
 
-function jsonDeepCopy(obj) {
-    return JSON.parse(JSON.stringify(obj));
-}
+const obj = { a: 1, b: { c: 2 } };
+const refCopy = obj;
+const deepCopy = JSON.parse(JSON.stringify(obj));
 
-// Usage:
-// const a = {x:1, y:[2,3], z:{w:4}};
-// const b = jsonDeepCopy(a);
-// const c = deepClone(a);
-
-module.exports = { jsonDeepCopy, deepClone }; 
+module.exports = { refCopy, deepCopy }; 

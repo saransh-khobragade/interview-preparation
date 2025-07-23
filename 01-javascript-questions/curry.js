@@ -1,9 +1,7 @@
 /*
-Function Currying
-------------------
+Function Currying Example
+--------------------------
 Transforms a function with multiple arguments into a sequence of functions each taking a single argument.
-
-Approach: Use closures to accumulate arguments.
 */
 
 function curry(fn) {

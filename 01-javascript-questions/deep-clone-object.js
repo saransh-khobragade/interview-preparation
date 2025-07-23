@@ -1,30 +1,19 @@
-// Deep Clone Object - Handles arrays, objects, dates, regex
+/*
+Deep Clone Object
+------------------
+Creates a deep copy of an object, recursively copying all nested objects and arrays.
 
-function deepClone(obj, hash = new WeakMap()) {
-    if (Object(obj) !== obj) return obj; // primitives
-    if (hash.has(obj)) return hash.get(obj); // cyclic reference
-    let result;
-    if (Array.isArray(obj)) {
-        result = [];
-        hash.set(obj, result);
-        obj.forEach((item, i) => {
-            result[i] = deepClone(item, hash);
-        });
-        return result;
-    }
-    if (obj instanceof Date) return new Date(obj);
-    if (obj instanceof RegExp) return new RegExp(obj);
-    result = {};
-    hash.set(obj, result);
+Approach: Use recursion and Array.isArray to handle arrays and objects.
+*/
+
+function deepClone(obj) {
+    if (obj === null || typeof obj !== 'object') return obj;
+    if (Array.isArray(obj)) return obj.map(deepClone);
+    const clone = {};
     for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            result[key] = deepClone(obj[key], hash);
-        }
+        clone[key] = deepClone(obj[key]);
     }
-    return result;
+    return clone;
 }
 
-// Usage:
-// deepClone({a:1, b:[2,3], c:{d:4}})
-
-module.exports = { deepClone }; 
+module.exports = deepClone; 

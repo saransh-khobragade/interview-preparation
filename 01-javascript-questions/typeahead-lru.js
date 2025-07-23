@@ -1,36 +1,28 @@
-// Typeahead Search with LRU Cache
+/*
+Typeahead LRU Cache
+--------------------
+Implements a Least Recently Used (LRU) cache for typeahead/autocomplete suggestions.
+
+Approach: Use a Map to maintain order and size.
+*/
 
 class LRUCache {
-    constructor(capacity) {
-        this.capacity = capacity;
+    constructor(limit = 5) {
         this.cache = new Map();
+        this.limit = limit;
     }
     get(key) {
         if (!this.cache.has(key)) return undefined;
-        const value = this.cache.get(key);
+        const val = this.cache.get(key);
         this.cache.delete(key);
-        this.cache.set(key, value);
-        return value;
+        this.cache.set(key, val);
+        return val;
     }
-    set(key, value) {
+    set(key, val) {
         if (this.cache.has(key)) this.cache.delete(key);
-        this.cache.set(key, value);
-        if (this.cache.size > this.capacity) {
-            this.cache.delete(this.cache.keys().next().value);
-        }
+        else if (this.cache.size === this.limit) this.cache.delete(this.cache.keys().next().value);
+        this.cache.set(key, val);
     }
 }
 
-function typeaheadSearch(query, data, cache) {
-    const cached = cache.get(query);
-    if (cached) return cached;
-    const result = data.filter(item => item.includes(query));
-    cache.set(query, result);
-    return result;
-}
-
-// Usage example:
-// const cache = new LRUCache(3);
-// typeaheadSearch('ap', ['apple','banana','apricot'], cache);
-
-module.exports = { LRUCache, typeaheadSearch }; 
+module.exports = LRUCache; 

@@ -1,12 +1,16 @@
-// React DOM Rendering Process (Simplified)
-
 /*
-1. React creates a virtual DOM (JS object tree)
-2. On state/prop change, React creates a new virtual DOM
-3. React diffs (reconciles) the new virtual DOM with the previous one
-4. React calculates the minimal set of changes (diff)
-5. React updates the real DOM in the browser efficiently
+React DOM Rendering Process
+---------------------------
+Explains how React updates the DOM efficiently using a virtual DOM and reconciliation.
 */
+
+// 1. React creates a virtual DOM (a lightweight JS object representation of the real DOM).
+// 2. When state/props change, React creates a new virtual DOM tree.
+// 3. React compares the new virtual DOM with the previous one (diffing/reconciliation).
+// 4. React calculates the minimal set of changes (patches).
+// 5. React updates the real DOM in a batch, applying only the necessary changes.
+
+// This process makes React fast and efficient for UI updates.
 
 // Example React component (pseudo-code)
 function App(props) {

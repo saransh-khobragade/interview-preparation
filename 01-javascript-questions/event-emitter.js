@@ -1,38 +1,34 @@
-// Event Emitter
-// This file implements a simple EventEmitter class for publish/subscribe (pub/sub) event handling in JavaScript.
-// Supports on, off, emit, and once methods for managing event listeners.
-// Useful for decoupling code and building event-driven systems.
+/*
+EventEmitter Implementation
+---------------------------
+Implements an event emitter with on, off, emit, and once methods.
+
+Approach: Use a Map to store event listeners.
+*/
 
 class EventEmitter {
     constructor() {
-        this.events = {};
+        this.events = new Map();
     }
     on(event, listener) {
-        if (!this.events[event]) this.events[event] = [];
-        this.events[event].push(listener);
+        if (!this.events.has(event)) this.events.set(event, []);
+        this.events.get(event).push(listener);
     }
     off(event, listener) {
-        if (!this.events[event]) return;
-        this.events[event] = this.events[event].filter(l => l !== listener);
+        if (!this.events.has(event)) return;
+        this.events.set(event, this.events.get(event).filter(l => l !== listener));
     }
     emit(event, ...args) {
-        if (!this.events[event]) return;
-        for (const listener of this.events[event]) {
-            listener(...args);
-        }
+        if (!this.events.has(event)) return;
+        for (const listener of this.events.get(event)) listener(...args);
     }
     once(event, listener) {
         const wrapper = (...args) => {
-            listener(...args);
             this.off(event, wrapper);
+            listener(...args);
         };
         this.on(event, wrapper);
     }
 }
 
-// Usage example:
-// const emitter = new EventEmitter();
-// emitter.on('data', (msg) => console.log(msg));
-// emitter.emit('data', 'Hello!');
-
-module.exports = { EventEmitter }; 
+module.exports = EventEmitter; 

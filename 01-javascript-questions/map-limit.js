@@ -1,30 +1,22 @@
-// mapLimit - Control concurrency of async calls
-// mapLimit(arr, limit, asyncFn) returns a Promise that resolves to mapped results
+/*
+Async Map with Concurrency Limit
+---------------------------------
+Maps over an array with an async function, running at most 'limit' tasks in parallel.
 
-function mapLimit(arr, limit, asyncFn) {
-    return new Promise((resolve, reject) => {
-        const results = [];
-        let running = 0, index = 0, finished = 0;
-        function next() {
-            if (finished === arr.length) return resolve(results);
-            while (running < limit && index < arr.length) {
-                const currentIndex = index++;
-                running++;
-                Promise.resolve(asyncFn(arr[currentIndex], currentIndex, arr))
-                    .then(res => {
-                        results[currentIndex] = res;
-                        running--;
-                        finished++;
-                        next();
-                    })
-                    .catch(reject);
-            }
-        }
-        next();
-    });
+Approach: Use a queue and recursion to manage concurrency.
+*/
+
+async function mapLimit(arr, limit, asyncFn) {
+    const results = [];
+    let i = 0;
+    async function next() {
+        if (i >= arr.length) return;
+        const idx = i++;
+        results[idx] = await asyncFn(arr[idx], idx, arr);
+        await next();
+    }
+    await Promise.all(Array(Math.min(limit, arr.length)).fill().map(next));
+    return results;
 }
 
-// Usage example:
-// mapLimit([1,2,3,4,5], 2, async x => x * 2).then(console.log);
-
-module.exports = { mapLimit }; 
+module.exports = mapLimit; 

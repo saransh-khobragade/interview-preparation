@@ -1,7 +1,9 @@
 /*
-Basic Debounce
----------------
-Delays function execution until after a specified wait time has elapsed since the last call.
+Debounce Function
+------------------
+Limits how often a function can fire. Only executes after a specified delay since the last call.
+
+Use: Useful for input events, resize, scroll, etc.
 */
 
 function debounce(fn, delay) {
