@@ -1,6 +1,6 @@
 # System Design Questions
 
-This section contains **7 trending system design questions** commonly asked in technical interviews at top tech companies.
+This section contains **6 trending system design questions** commonly asked in technical interviews at top tech companies.
 
 ## 📋 **Questions Covered**
 
@@ -36,15 +36,7 @@ This section contains **7 trending system design questions** commonly asked in t
 - Trip management
 - **Scale:** Millions of drivers, real-time geolocation
 
-### **5. URL Shortener** (`5-url-shortener/`)
-**Similar to:** bit.ly, TinyURL, t.co
-- URL encoding/decoding
-- Analytics and tracking
-- Rate limiting
-- Custom aliases
-- **Scale:** Billions of URLs, high read/write ratio
-
-### **6. Twitter Microblogging** (`6-twitter/`)
+### **5. Twitter Microblogging** (`6-twitter/`)
 **Similar to:** Twitter/X, Mastodon
 - Tweet posting and timeline
 - Follower/following system
@@ -52,7 +44,7 @@ This section contains **7 trending system design questions** commonly asked in t
 - Real-time notifications
 - **Scale:** 500M users, billions of tweets
 
-### **7. E-commerce Platform** (`7-e-commerce/`)
+### **6. E-commerce Platform** (`7-e-commerce/`)
 **Similar to:** Amazon, eBay, Shopify
 - Product catalog and search
 - Shopping cart and checkout
