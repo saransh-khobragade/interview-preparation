@@ -5,7 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Node debug",
+            "type": "node",
+            "request": "launch",
+            "name": "TypeScript",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "runtimeExecutable": "npx",
+            "runtimeArgs": [
+                "tsx"
+            ],
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "restart": false,
+            "autoAttachChildProcesses": true
+        },
+        {
+            "name": "Node",
             "runtimeExecutable": "node",
             "program": "${file}",
             "request": "launch",
@@ -15,20 +32,11 @@
             "type": "node"
         },
         {
-            "type": "node",
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
             "request": "launch",
-            "name": "TypeScript debug",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "runtimeExecutable": "npx",
-            "runtimeArgs": ["tsx"],
             "program": "${file}",
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "restart": false,
-            "autoAttachChildProcesses": true
-        },
-
+            "console": "integratedTerminal"
+        }
     ]
 }
