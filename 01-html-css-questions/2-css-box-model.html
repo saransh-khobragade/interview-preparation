@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Box Model</title>
+    <style>
+        /* Q1: What is the CSS Box Model? */
+        /* A: Every element is a rectangular box with content, padding, border, and margin */
+
+        .box-model {
+            width: 200px;
+            height: 100px;
+            padding: 20px;
+            border: 5px solid #333;
+            margin: 10px;
+            background-color: #f0f0f0;
+        }
+
+        /* Q2: What's the difference between margin and padding? */
+        /* A: Padding is inside border, margin is outside border */
+
+        .margin-example {
+            margin: 10px 20px 30px 40px; /* top right bottom left */
+            border: 2px solid red;
+        }
+
+        .padding-example {
+            padding: 10px 20px 30px 40px; /* top right bottom left */
+            border: 2px solid blue;
+        }
+
+        /* Q3: What is box-sizing: border-box? */
+        /* A: Includes padding and border in element's total width/height */
+
+        .border-box {
+            box-sizing: border-box;
+            width: 200px;
+            padding: 20px;
+            border: 5px solid #333;
+            /* Total width = 200px (includes padding and border) */
+        }
+
+        .content-box {
+            box-sizing: content-box; /* default */
+            width: 200px;
+            padding: 20px;
+            border: 5px solid #333;
+            /* Total width = 200px + 40px + 10px = 250px */
+        }
+
+        /* Q4: How to center an element horizontally? */
+        .center-horizontal {
+            width: 200px;
+            margin: 0 auto; /* centers horizontally */
+            border: 2px solid green;
+        }
+
+        /* Q5: What's the difference between display: block and display: inline? */
+        .block-element {
+            display: block; /* takes full width, starts on new line */
+            background: yellow;
+            margin: 10px 0;
+        }
+
+        .inline-element {
+            display: inline; /* takes only needed width, no line breaks */
+            background: lightblue;
+            /* margin/padding only work horizontally */
+        }
+    </style>
+</head>
+<body>
+    <div class="box-model">Box Model Example</div>
+    
+    <div class="margin-example">Margin Example</div>
+    <div class="padding-example">Padding Example</div>
+    
+    <div class="border-box">Border Box (200px total)</div>
+    <div class="content-box">Content Box (250px total)</div>
+    
+    <div class="center-horizontal">Centered Element</div>
+    
+    <div class="block-element">Block Element 1</div>
+    <div class="block-element">Block Element 2</div>
+    
+    <span class="inline-element">Inline Element 1</span>
+    <span class="inline-element">Inline Element 2</span>
+</body>
+</html> 

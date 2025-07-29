@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Selectors & Specificity</title>
+    <style>
+        /* Q1: What are CSS selectors and types? */
+        /* A: Patterns used to select and style HTML elements */
+
+        /* Element selector */
+        p {
+            color: blue;
+        }
+
+        /* Class selector */
+        .highlight {
+            background-color: yellow;
+        }
+
+        /* ID selector */
+        #main-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Q2: What's the difference between class and ID selectors? */
+        /* A: Classes can be used multiple times, IDs must be unique */
+
+        /* Q3: What are attribute selectors? */
+        input[type="text"] {
+            border: 2px solid #ccc;
+        }
+
+        input[type="password"] {
+            border: 2px solid #ff0000;
+        }
+
+        /* Q4: What are pseudo-classes and pseudo-elements? */
+        /* Pseudo-class: state-based selection */
+        .button:hover {
+            background-color: #333;
+            color: white;
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        /* Pseudo-element: creates virtual elements */
+        .quote::before {
+            content: '"';
+            font-size: 24px;
+            color: #666;
+        }
+
+        .quote::after {
+            content: '"';
+            font-size: 24px;
+            color: #666;
+        }
+
+        /* Q5: What are combinators? */
+        /* Descendant selector (space) */
+        .container p {
+            margin: 10px 0;
+        }
+
+        /* Child selector (>) */
+        .parent > .child {
+            border: 1px solid #ccc;
+        }
+
+        /* Adjacent sibling selector (+) */
+        .sibling + .adjacent {
+            background-color: #f0f0f0;
+        }
+
+        /* General sibling selector (~) */
+        .sibling ~ .general {
+            color: green;
+        }
+
+        /* Q6: What is CSS specificity and how to calculate it? */
+        /* A: Determines which CSS rule applies when multiple rules target same element */
+        /* Specificity: inline > ID > class > element */
+
+        /* Specificity: 0,0,1,0 (class) */
+        .specificity-example {
+            color: red;
+        }
+
+        /* Specificity: 0,0,1,1 (class + element) */
+        div.specificity-example {
+            color: blue; /* This wins */
+        }
+
+        /* Specificity: 0,1,0,0 (ID) */
+        #specificity-id {
+            color: green; /* This wins */
+        }
+
+        /* Q7: How to override specificity? */
+        /* Using !important (avoid when possible) */
+        .important-example {
+            color: red !important;
+        }
+
+        /* Increasing specificity */
+        body .important-example {
+            color: blue; /* Won't override !important */
+        }
+
+        /* Q8: What are universal and grouping selectors? */
+        /* Universal selector */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Grouping selector */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Q9: What are structural pseudo-classes? */
+        .list-item:first-child {
+            font-weight: bold;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .list-item:nth-child(even) {
+            background-color: #fff;
+        }
+
+        /* Q10: How to select elements by their position? */
+        .position-example:first-of-type {
+            color: red;
+        }
+
+        .position-example:last-of-type {
+            color: blue;
+        }
+
+        .position-example:nth-of-type(2) {
+            color: green;
+        }
+
+        /* Utility classes */
+        .button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .container {
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+
+        .parent {
+            background-color: #f8f9fa;
+            padding: 15px;
+        }
+
+        .child {
+            background-color: white;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .sibling {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .adjacent {
+            background-color: #dee2e6;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .general {
+            background-color: #ced4da;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .list-item {
+            padding: 5px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .position-example {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="main-title">CSS Selectors & Specificity</h1>
+
+    <div class="container">
+        <p>This paragraph is styled with element selector</p>
+        <p class="highlight">This paragraph has a class</p>
+    </div>
+
+    <div class="container">
+        <h3>Attribute Selectors</h3>
+        <input type="text" placeholder="Text input">
+        <input type="password" placeholder="Password input">
+    </div>
+
+    <div class="container">
+        <h3>Pseudo-classes & Pseudo-elements</h3>
+        <button class="button">Hover over me</button>
+        <p class="quote">This is a quote with pseudo-elements</p>
+    </div>
+
+    <div class="container">
+        <h3>Combinators</h3>
+        <div class="parent">
+            <p>Direct child paragraph</p>
+            <div class="child">Child element</div>
+            <div class="child">Another child</div>
+        </div>
+        
+        <div class="sibling">Sibling 1</div>
+        <div class="adjacent">Adjacent sibling</div>
+        <div class="general">General sibling 1</div>
+        <div class="general">General sibling 2</div>
+    </div>
+
+    <div class="container">
+        <h3>Specificity Examples</h3>
+        <div class="specificity-example">Class selector (red)</div>
+        <div class="specificity-example" id="specificity-id">ID selector wins (green)</div>
+        <div class="important-example">Important example (red)</div>
+    </div>
+
+    <div class="container">
+        <h3>Structural Pseudo-classes</h3>
+        <ul>
+            <li class="list-item">First item (bold)</li>
+            <li class="list-item">Second item</li>
+            <li class="list-item">Third item</li>
+            <li class="list-item">Last item (no border)</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h3>Position-based Selection</h3>
+        <div class="position-example">First of type (red)</div>
+        <div class="position-example">Second of type (green)</div>
+        <div class="position-example">Last of type (blue)</div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Methodologies (BEM, SMACSS)</title>
+    <style>
+        /* Q1: What is BEM methodology? */
+        /* A: Block Element Modifier - naming convention for CSS classes */
+
+        /* BEM Example */
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            background: white;
+        }
+
+        .card__title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card__content {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .card__button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .card__button--primary {
+            background: #007bff;
+        }
+
+        .card__button--secondary {
+            background: #6c757d;
+        }
+
+        .card--featured {
+            border-color: #007bff;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .card--large {
+            padding: 30px;
+        }
+
+        /* Q2: What is SMACSS methodology? */
+        /* A: Scalable and Modular Architecture for CSS */
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Layout styles */
+        .l-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .l-header {
+            background: #f8f9fa;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .l-main {
+            padding: 40px 0;
+        }
+
+        .l-sidebar {
+            width: 250px;
+            float: left;
+        }
+
+        .l-content {
+            margin-left: 270px;
+        }
+
+        /* Module styles */
+        .m-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .m-button--primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .m-button--secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .m-button--success {
+            background: #28a745;
+            color: white;
+        }
+
+        .m-button--danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* State styles */
+        .is-hidden {
+            display: none;
+        }
+
+        .is-active {
+            background: #007bff;
+            color: white;
+        }
+
+        .is-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Theme styles */
+        .t-dark {
+            background: #333;
+            color: white;
+        }
+
+        .t-dark .card {
+            background: #444;
+            border-color: #555;
+        }
+
+        /* Q3: What is OOCSS (Object-Oriented CSS)? */
+        /* A: Separates structure from skin, containers from content */
+
+        /* Structure */
+        .media {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .media__image {
+            margin-right: 10px;
+        }
+
+        .media__body {
+            flex: 1;
+        }
+
+        /* Skin */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn--blue {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn--red {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Q4: What is ITCSS (Inverted Triangle CSS)? */
+        /* A: Organizes CSS by specificity and reach */
+
+        /* Settings (variables) */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --spacing-unit: 8px;
+        }
+
+        /* Tools (mixins, functions) */
+        .u-text-center {
+            text-align: center;
+        }
+
+        .u-margin-bottom {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .u-padding {
+            padding: var(--spacing-unit);
+        }
+
+        /* Generic (reset, normalize) */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Elements (base styles) */
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 0.5em;
+        }
+
+        /* Objects (layout, structure) */
+        .o-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .o-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .o-grid--2-cols {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .o-grid--3-cols {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Components (specific UI components) */
+        .c-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+        }
+
+        .c-card__header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .c-card__title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Utilities (helper classes) */
+        .u-hidden {
+            display: none;
+        }
+
+        .u-visible {
+            display: block;
+        }
+
+        .u-text-primary {
+            color: var(--primary-color);
+        }
+
+        .u-bg-primary {
+            background-color: var(--primary-color);
+        }
+
+        /* Q5: How to organize CSS files? */
+        /* A: Separate concerns into different files */
+
+        /* Q6: What are CSS custom properties (variables)? */
+        /* A: Reusable values defined with -- and used with var() */
+
+        /* Q7: How to create responsive utilities? */
+        .u-hidden-mobile {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .u-hidden-mobile {
+                display: none;
+            }
+        }
+
+        .u-visible-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .u-visible-mobile {
+                display: block;
+            }
+        }
+
+        /* Q8: How to create spacing utilities? */
+        .u-margin-0 { margin: 0; }
+        .u-margin-1 { margin: calc(var(--spacing-unit) * 1); }
+        .u-margin-2 { margin: calc(var(--spacing-unit) * 2); }
+        .u-margin-3 { margin: calc(var(--spacing-unit) * 3); }
+
+        .u-padding-0 { padding: 0; }
+        .u-padding-1 { padding: calc(var(--spacing-unit) * 1); }
+        .u-padding-2 { padding: calc(var(--spacing-unit) * 2); }
+        .u-padding-3 { padding: calc(var(--spacing-unit) * 3); }
+
+        /* Q9: How to create flexbox utilities? */
+        .u-flex { display: flex; }
+        .u-flex-column { flex-direction: column; }
+        .u-flex-wrap { flex-wrap: wrap; }
+        .u-justify-center { justify-content: center; }
+        .u-justify-between { justify-content: space-between; }
+        .u-align-center { align-items: center; }
+        .u-flex-1 { flex: 1; }
+
+        /* Q10: How to create grid utilities? */
+        .u-grid { display: grid; }
+        .u-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+        .u-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .u-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .u-gap-1 { gap: calc(var(--spacing-unit) * 1); }
+        .u-gap-2 { gap: calc(var(--spacing-unit) * 2); }
+
+        /* Demo styles */
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .demo-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="l-container">
+        <header class="l-header">
+            <h1>CSS Methodologies</h1>
+        </header>
+
+        <main class="l-main">
+            <!-- BEM Example -->
+            <section class="demo-section">
+                <h2 class="demo-title">BEM Methodology</h2>
+                <div class="demo-grid">
+                    <div class="card">
+                        <h3 class="card__title">Regular Card</h3>
+                        <p class="card__content">This is a regular card with BEM naming.</p>
+                        <button class="card__button card__button--primary">Primary</button>
+                        <button class="card__button card__button--secondary">Secondary</button>
+                    </div>
+
+                    <div class="card card--featured">
+                        <h3 class="card__title">Featured Card</h3>
+                        <p class="card__content">This card has the featured modifier.</p>
+                        <button class="card__button card__button--primary">Action</button>
+                    </div>
+
+                    <div class="card card--large">
+                        <h3 class="card__title">Large Card</h3>
+                        <p class="card__content">This card has the large modifier for more padding.</p>
+                        <button class="card__button card__button--primary">Large Action</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SMACSS Example -->
+            <section class="demo-section">
+                <h2 class="demo-title">SMACSS Methodology</h2>
+                <div class="demo-grid">
+                    <div class="c-card">
+                        <div class="c-card__header">
+                            <h3 class="c-card__title">SMACSS Card</h3>
+                        </div>
+                        <p>This card uses SMACSS naming conventions.</p>
+                        <button class="m-button m-button--primary">Primary</button>
+                        <button class="m-button m-button--secondary">Secondary</button>
+                    </div>
+
+                    <div class="c-card">
+                        <div class="c-card__header">
+                            <h3 class="c-card__title">State Example</h3>
+                        </div>
+                        <p>Demonstrating state classes.</p>
+                        <button class="m-button m-button--success is-active">Active</button>
+                        <button class="m-button m-button--danger is-disabled">Disabled</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OOCSS Example -->
+            <section class="demo-section">
+                <h2 class="demo-title">OOCSS Methodology</h2>
+                <div class="media">
+                    <div class="media__image">
+                        <div style="width: 50px; height: 50px; background: #007bff; border-radius: 50%;"></div>
+                    </div>
+                    <div class="media__body">
+                        <h4>Media Object</h4>
+                        <p>This demonstrates the media object pattern from OOCSS.</p>
+                        <button class="btn btn--blue">Blue Button</button>
+                        <button class="btn btn--red">Red Button</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ITCSS Example -->
+            <section class="demo-section">
+                <h2 class="demo-title">ITCSS Methodology</h2>
+                <div class="o-grid o-grid--3-cols">
+                    <div class="c-card u-padding">
+                        <h3 class="c-card__title u-text-primary">ITCSS Card 1</h3>
+                        <p class="u-margin-bottom">Using ITCSS organization.</p>
+                        <button class="m-button m-button--primary">Action</button>
+                    </div>
+
+                    <div class="c-card u-padding">
+                        <h3 class="c-card__title u-text-primary">ITCSS Card 2</h3>
+                        <p class="u-margin-bottom">With utility classes.</p>
+                        <button class="m-button m-button--secondary">Action</button>
+                    </div>
+
+                    <div class="c-card u-padding">
+                        <h3 class="c-card__title u-text-primary">ITCSS Card 3</h3>
+                        <p class="u-margin-bottom">Organized by specificity.</p>
+                        <button class="m-button m-button--success">Action</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Utility Classes Example -->
+            <section class="demo-section">
+                <h2 class="demo-title">Utility Classes</h2>
+                <div class="u-flex u-justify-between u-align-center u-padding-2">
+                    <div>
+                        <h4 class="u-text-primary">Flexbox Utilities</h4>
+                        <p>Demonstrating flexbox utility classes.</p>
+                    </div>
+                    <div class="u-flex u-gap-1">
+                        <button class="m-button m-button--primary">Button 1</button>
+                        <button class="m-button m-button--secondary">Button 2</button>
+                    </div>
+                </div>
+
+                <div class="u-grid u-grid-cols-2 u-gap-2 u-margin-2">
+                    <div class="c-card u-padding">
+                        <h4>Grid Utility 1</h4>
+                        <p>Using grid utility classes.</p>
+                    </div>
+                    <div class="c-card u-padding">
+                        <h4>Grid Utility 2</h4>
+                        <p>Organized layout with utilities.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Responsive Utilities -->
+            <section class="demo-section">
+                <h2 class="demo-title">Responsive Utilities</h2>
+                <div class="u-hidden-mobile">
+                    <p>This content is hidden on mobile devices.</p>
+                </div>
+                <div class="u-visible-mobile">
+                    <p>This content is only visible on mobile devices.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html> 

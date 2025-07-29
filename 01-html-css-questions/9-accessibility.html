@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Accessibility (ARIA)</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .example {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .tab-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .tab-list {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tab-button[aria-selected="true"] {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .tab-panel {
+            padding: 20px;
+            display: none;
+        }
+
+        .tab-panel[aria-hidden="false"] {
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal[aria-hidden="false"] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            max-width: 500px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTML Accessibility (ARIA)</h1>
+
+        <!-- Q1: What is ARIA and why use it? -->
+        <div class="example">
+            <h3>Q1: ARIA Basics</h3>
+            <p>ARIA (Accessible Rich Internet Applications) provides additional semantics for screen readers and assistive technologies.</p>
+            
+            <!-- Bad: No accessibility -->
+            <div class="button">Click me</div>
+            
+            <!-- Good: With ARIA -->
+            <button class="button" aria-label="Submit form data">Submit</button>
+        </div>
+
+        <!-- Q2: How to create accessible forms? -->
+        <div class="example">
+            <h3>Q2: Accessible Forms</h3>
+            <form>
+                <!-- Bad: Missing label -->
+                <input type="text" placeholder="Enter name">
+                
+                <!-- Good: Proper label association -->
+                <div class="form-group">
+                    <label for="name-input">Full Name:</label>
+                    <input type="text" id="name-input" name="name" required 
+                           aria-describedby="name-help">
+                    <div id="name-help" class="sr-only">Enter your full name as it appears on your ID</div>
+                </div>
+
+                <!-- Good: Error state -->
+                <div class="form-group">
+                    <label for="email-input">Email Address:</label>
+                    <input type="email" id="email-input" name="email" 
+                           aria-invalid="true" aria-describedby="email-error">
+                    <div id="email-error" class="alert alert-error" role="alert">
+                        Please enter a valid email address
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Q3: How to create accessible buttons? -->
+        <div class="example">
+            <h3>Q3: Accessible Buttons</h3>
+            
+            <!-- Bad: Div as button -->
+            <div class="button" onclick="alert('clicked')">Click me</div>
+            
+            <!-- Good: Semantic button -->
+            <button class="button" onclick="alert('clicked')">Click me</button>
+            
+            <!-- Good: Icon button with aria-label -->
+            <button class="button" aria-label="Close dialog">
+                ✕
+            </button>
+            
+            <!-- Good: Button with expanded state -->
+            <button class="button" aria-expanded="false" aria-controls="dropdown">
+                Menu <span aria-hidden="true">▼</span>
+            </button>
+        </div>
+
+        <!-- Q4: How to create accessible navigation? -->
+        <div class="example">
+            <h3>Q4: Accessible Navigation</h3>
+            <nav aria-label="Main navigation">
+                <ul role="menubar">
+                    <li role="none">
+                        <a href="#" role="menuitem" aria-current="page">Home</a>
+                    </li>
+                    <li role="none">
+                        <a href="#" role="menuitem">About</a>
+                    </li>
+                    <li role="none">
+                        <a href="#" role="menuitem">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Q5: How to create accessible tabs? -->
+        <div class="example">
+            <h3>Q5: Accessible Tabs</h3>
+            <div class="tab-container">
+                <div class="tab-list" role="tablist">
+                    <button class="tab-button" role="tab" aria-selected="true" 
+                            aria-controls="panel1" id="tab1">
+                        Tab 1
+                    </button>
+                    <button class="tab-button" role="tab" aria-selected="false" 
+                            aria-controls="panel2" id="tab2">
+                        Tab 2
+                    </button>
+                </div>
+                
+                <div id="panel1" class="tab-panel" role="tabpanel" 
+                     aria-labelledby="tab1" aria-hidden="false">
+                    <h4>Tab 1 Content</h4>
+                    <p>This is the content for tab 1.</p>
+                </div>
+                
+                <div id="panel2" class="tab-panel" role="tabpanel" 
+                     aria-labelledby="tab2" aria-hidden="true">
+                    <h4>Tab 2 Content</h4>
+                    <p>This is the content for tab 2.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q6: How to create accessible modals? -->
+        <div class="example">
+            <h3>Q6: Accessible Modal</h3>
+            <button class="button" onclick="openModal()">Open Modal</button>
+            
+            <div class="modal" role="dialog" aria-labelledby="modal-title" 
+                 aria-describedby="modal-description" aria-hidden="true">
+                <div class="modal-content">
+                    <h2 id="modal-title">Modal Title</h2>
+                    <p id="modal-description">This is the modal description.</p>
+                    <button class="button" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q7: How to create accessible progress indicators? -->
+        <div class="example">
+            <h3>Q7: Accessible Progress</h3>
+            <div class="progress-bar" role="progressbar" aria-valuenow="75" 
+                 aria-valuemin="0" aria-valuemax="100" aria-label="Upload progress">
+                <div class="progress-fill" style="width: 75%"></div>
+            </div>
+            <p>75% complete</p>
+        </div>
+
+        <!-- Q8: How to handle dynamic content updates? -->
+        <div class="example">
+            <h3>Q8: Dynamic Content</h3>
+            <button class="button" onclick="updateContent()">Update Content</button>
+            
+            <div id="live-region" aria-live="polite" aria-atomic="true">
+                <p>Initial content</p>
+            </div>
+            
+            <div id="status-region" aria-live="status" aria-atomic="false">
+                <!-- Status updates will be announced here -->
+            </div>
+        </div>
+
+        <!-- Q9: How to create accessible tables? -->
+        <div class="example">
+            <h3>Q9: Accessible Tables</h3>
+            <table role="table" aria-label="User data">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">John Doe</th>
+                        <td>john@example.com</td>
+                        <td>Developer</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Jane Smith</th>
+                        <td>jane@example.com</td>
+                        <td>Designer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Q10: How to create accessible images? -->
+        <div class="example">
+            <h3>Q10: Accessible Images</h3>
+            
+            <!-- Bad: No alt text -->
+            <img src="logo.png">
+            
+            <!-- Good: Descriptive alt text -->
+            <img src="logo.png" alt="Company logo">
+            
+            <!-- Good: Decorative image -->
+            <img src="decoration.png" alt="" role="presentation">
+            
+            <!-- Good: Complex image with long description -->
+            <img src="chart.png" alt="Sales chart for Q4 2023" 
+                 aria-describedby="chart-description">
+            <div id="chart-description" class="sr-only">
+                Bar chart showing sales data: January $50K, February $65K, 
+                March $80K, April $75K
+            </div>
+        </div>
+
+        <!-- Q11: How to create accessible lists? -->
+        <div class="example">
+            <h3>Q11: Accessible Lists</h3>
+            
+            <!-- Good: Semantic list -->
+            <ul>
+                <li>First item</li>
+                <li>Second item</li>
+                <li>Third item</li>
+            </ul>
+            
+            <!-- Good: Custom styled list -->
+            <div role="list">
+                <div role="listitem">Custom styled item 1</div>
+                <div role="listitem">Custom styled item 2</div>
+                <div role="listitem">Custom styled item 3</div>
+            </div>
+        </div>
+
+        <!-- Q12: How to create accessible landmarks? -->
+        <div class="example">
+            <h3>Q12: Accessible Landmarks</h3>
+            
+            <!-- Good: Semantic landmarks -->
+            <header role="banner">
+                <h1>Page Title</h1>
+            </header>
+            
+            <main role="main">
+                <h2>Main Content</h2>
+                <p>This is the main content area.</p>
+            </main>
+            
+            <aside role="complementary">
+                <h3>Related Information</h3>
+                <p>Additional content here.</p>
+            </aside>
+            
+            <footer role="contentinfo">
+                <p>&copy; 2024 Company Name</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active state from all tabs
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                document.querySelectorAll('.tab-panel').forEach(panel => {
+                    panel.setAttribute('aria-hidden', 'true');
+                });
+                
+                // Set active state for clicked tab
+                button.setAttribute('aria-selected', 'true');
+                const panelId = button.getAttribute('aria-controls');
+                document.getElementById(panelId).setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        // Modal functionality
+        function openModal() {
+            const modal = document.querySelector('.modal');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Dynamic content update
+        function updateContent() {
+            const liveRegion = document.getElementById('live-region');
+            const statusRegion = document.getElementById('status-region');
+            
+            liveRegion.innerHTML = '<p>Content has been updated!</p>';
+            statusRegion.textContent = 'Content updated successfully';
+            
+            // Clear status after a delay
+            setTimeout(() => {
+                statusRegion.textContent = '';
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

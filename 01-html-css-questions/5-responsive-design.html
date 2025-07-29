@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design</title>
+    <style>
+        /* Q1: What is responsive design? */
+        /* A: Design that adapts to different screen sizes and devices */
+
+        /* Q2: What's the viewport meta tag and why use it? */
+        /* A: Controls page's width and scaling on mobile devices */
+
+        .responsive-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Q3: What are media queries and how to use them? */
+        /* A: CSS rules that apply based on device characteristics */
+
+        .mobile-first {
+            background: lightblue;
+            padding: 10px;
+        }
+
+        /* Tablet and up */
+        @media (min-width: 768px) {
+            .mobile-first {
+                background: lightgreen;
+                padding: 20px;
+            }
+        }
+
+        /* Desktop and up */
+        @media (min-width: 1024px) {
+            .mobile-first {
+                background: lightcoral;
+                padding: 30px;
+            }
+        }
+
+        /* Q4: What's the difference between min-width and max-width? */
+        .desktop-first {
+            background: lightyellow;
+            padding: 30px;
+        }
+
+        /* Tablet and down */
+        @media (max-width: 1023px) {
+            .desktop-first {
+                background: lightpink;
+                padding: 20px;
+            }
+        }
+
+        /* Mobile and down */
+        @media (max-width: 767px) {
+            .desktop-first {
+                background: lightcyan;
+                padding: 10px;
+            }
+        }
+
+        /* Q5: How to create responsive images? */
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Q6: What are CSS Grid and Flexbox for responsive layouts? */
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .responsive-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .responsive-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .grid-item {
+            background: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        /* Q7: How to hide/show elements responsively? */
+        .desktop-only {
+            display: block;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .desktop-only {
+                display: none;
+            }
+            .mobile-only {
+                display: block;
+            }
+        }
+
+        /* Q8: What are relative units (em, rem, %, vw, vh)? */
+        .relative-units {
+            font-size: 1rem; /* relative to root font size */
+            padding: 2em; /* relative to element's font size */
+            width: 50%; /* relative to parent */
+            height: 50vh; /* relative to viewport height */
+        }
+
+        /* Q9: How to create responsive typography? */
+        .responsive-text {
+            font-size: 16px; /* base size */
+        }
+
+        @media (min-width: 768px) {
+            .responsive-text {
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .responsive-text {
+                font-size: 20px;
+            }
+        }
+
+        /* Q10: What's the difference between mobile-first and desktop-first? */
+        /* A: Mobile-first starts with mobile styles and adds complexity, desktop-first starts with desktop and simplifies */
+    </style>
+</head>
+<body>
+    <div class="responsive-container">
+        <h1>Responsive Design Examples</h1>
+
+        <h3>Mobile-First Approach</h3>
+        <div class="mobile-first">
+            <p>This element changes color and padding based on screen size:</p>
+            <ul>
+                <li>Mobile: Light blue, 10px padding</li>
+                <li>Tablet: Light green, 20px padding</li>
+                <li>Desktop: Light coral, 30px padding</li>
+            </ul>
+        </div>
+
+        <h3>Desktop-First Approach</h3>
+        <div class="desktop-first">
+            <p>This element starts with desktop styles and simplifies:</p>
+            <ul>
+                <li>Desktop: Light yellow, 30px padding</li>
+                <li>Tablet: Light pink, 20px padding</li>
+                <li>Mobile: Light cyan, 10px padding</li>
+            </ul>
+        </div>
+
+        <h3>Responsive Grid</h3>
+        <div class="responsive-grid">
+            <div class="grid-item">Item 1</div>
+            <div class="grid-item">Item 2</div>
+            <div class="grid-item">Item 3</div>
+        </div>
+
+        <h3>Responsive Visibility</h3>
+        <div class="desktop-only">
+            <p>This content is only visible on desktop (768px+)</p>
+        </div>
+        <div class="mobile-only">
+            <p>This content is only visible on mobile (below 768px)</p>
+        </div>
+
+        <h3>Responsive Typography</h3>
+        <div class="responsive-text">
+            <p>This text size adapts to screen size:</p>
+            <ul>
+                <li>Mobile: 16px</li>
+                <li>Tablet: 18px</li>
+                <li>Desktop: 20px</li>
+            </ul>
+        </div>
+
+        <h3>Relative Units Example</h3>
+        <div class="relative-units">
+            <p>This element uses relative units:</p>
+            <ul>
+                <li>font-size: 1rem (relative to root)</li>
+                <li>padding: 2em (relative to element font-size)</li>
+                <li>width: 50% (relative to parent)</li>
+                <li>height: 50vh (relative to viewport)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

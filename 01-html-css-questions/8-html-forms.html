@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Forms & Validation</title>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: green;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .example {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>HTML Forms & Validation</h1>
+
+        <!-- Q1: What are the main form elements in HTML5? -->
+        <div class="example">
+            <h3>Q1: Main Form Elements</h3>
+            <form>
+                <div class="form-group">
+                    <label for="text-input">Text Input:</label>
+                    <input type="text" id="text-input" name="text-input" placeholder="Enter text">
+                </div>
+
+                <div class="form-group">
+                    <label for="email-input">Email Input:</label>
+                    <input type="email" id="email-input" name="email-input" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password-input">Password Input:</label>
+                    <input type="password" id="password-input" name="password-input" placeholder="Enter password">
+                </div>
+
+                <div class="form-group">
+                    <label for="number-input">Number Input:</label>
+                    <input type="number" id="number-input" name="number-input" min="0" max="100" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="date-input">Date Input:</label>
+                    <input type="date" id="date-input" name="date-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="file-input">File Input:</label>
+                    <input type="file" id="file-input" name="file-input" accept=".pdf,.doc,.docx">
+                </div>
+            </form>
+        </div>
+
+        <!-- Q2: How to create radio buttons and checkboxes? -->
+        <div class="example">
+            <h3>Q2: Radio Buttons & Checkboxes</h3>
+            <form>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                </div>
+
+                <div class="form-group">
+                    <label>Interests:</label>
+                    <input type="checkbox" id="sports" name="interests" value="sports">
+                    <label for="sports">Sports</label>
+                    <input type="checkbox" id="music" name="interests" value="music">
+                    <label for="music">Music</label>
+                    <input type="checkbox" id="reading" name="interests" value="reading">
+                    <label for="reading">Reading</label>
+                </div>
+            </form>
+        </div>
+
+        <!-- Q3: How to create dropdown/select elements? -->
+        <div class="example">
+            <h3>Q3: Select Dropdown</h3>
+            <form>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <select id="country" name="country">
+                        <option value="">Select a country</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="ca">Canada</option>
+                        <option value="au">Australia</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills (Multiple):</label>
+                    <select id="skills" name="skills" multiple size="3">
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <!-- Q4: How to create textarea? -->
+        <div class="example">
+            <h3>Q4: Textarea</h3>
+            <form>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your message"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <!-- Q5: What are HTML5 form validation attributes? -->
+        <div class="example">
+            <h3>Q5: HTML5 Validation Attributes</h3>
+            <form>
+                <div class="form-group">
+                    <label for="required-field">Required Field:</label>
+                    <input type="text" id="required-field" name="required-field" required>
+                    <div class="error">This field is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pattern-field">Pattern Validation (Phone):</label>
+                    <input type="tel" id="pattern-field" name="pattern-field" 
+                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                           placeholder="123-456-7890">
+                    <div class="error">Format: 123-456-7890</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="min-max-field">Min/Max Length:</label>
+                    <input type="text" id="min-max-field" name="min-max-field" 
+                           minlength="3" maxlength="10" placeholder="3-10 characters">
+                </div>
+
+                <div class="form-group">
+                    <label for="range-field">Range Input:</label>
+                    <input type="range" id="range-field" name="range-field" min="0" max="100" value="50">
+                    <span id="range-value">50</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Q6: How to create custom form validation? -->
+        <div class="example">
+            <h3>Q6: Custom Validation</h3>
+            <form id="custom-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <div class="error" id="username-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <div class="error" id="password-error"></div>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Q7: What are form methods and actions? -->
+        <div class="example">
+            <h3>Q7: Form Methods & Actions</h3>
+            <!-- GET method - data in URL -->
+            <form action="/submit" method="get">
+                <div class="form-group">
+                    <label for="search">Search:</label>
+                    <input type="text" id="search" name="search" placeholder="Search...">
+                </div>
+                <button type="submit">Search (GET)</button>
+            </form>
+
+            <!-- POST method - data in request body -->
+            <form action="/submit" method="post">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <button type="submit">Login (POST)</button>
+            </form>
+        </div>
+
+        <!-- Q8: How to create fieldset and legend? -->
+        <div class="example">
+            <h3>Q8: Fieldset & Legend</h3>
+            <form>
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-group">
+                        <label for="first-name">First Name:</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name:</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <textarea id="address" name="address" rows="3"></textarea>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- Q9: How to create datalist for autocomplete? -->
+        <div class="example">
+            <h3>Q9: Datalist for Autocomplete</h3>
+            <form>
+                <div class="form-group">
+                    <label for="browser">Choose your browser:</label>
+                    <input list="browsers" id="browser" name="browser">
+                    <datalist id="browsers">
+                        <option value="Chrome">
+                        <option value="Firefox">
+                        <option value="Safari">
+                        <option value="Edge">
+                        <option value="Opera">
+                    </datalist>
+                </div>
+            </form>
+        </div>
+
+        <!-- Q10: How to create progress and meter elements? -->
+        <div class="example">
+            <h3>Q10: Progress & Meter Elements</h3>
+            <div class="form-group">
+                <label for="file-progress">File Upload Progress:</label>
+                <progress id="file-progress" value="70" max="100">70%</progress>
+            </div>
+
+            <div class="form-group">
+                <label for="disk-usage">Disk Usage:</label>
+                <meter id="disk-usage" value="0.6" min="0" max="1" low="0.3" high="0.8" optimum="0.5">60%</meter>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Custom validation example
+        document.getElementById('custom-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('confirm-password').value;
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+            
+            // Reset errors
+            usernameError.textContent = '';
+            passwordError.textContent = '';
+            
+            // Username validation
+            if (username.length < 3) {
+                usernameError.textContent = 'Username must be at least 3 characters';
+                return;
+            }
+            
+            // Password validation
+            if (password.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters';
+                return;
+            }
+            
+            alert('Form submitted successfully!');
+        });
+
+        // Range input value display
+        document.getElementById('range-field').addEventListener('input', function(e) {
+            document.getElementById('range-value').textContent = e.target.value;
+        });
+    </script>
+</body>
+</html> 

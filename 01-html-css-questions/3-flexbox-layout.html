@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox Layout</title>
+    <style>
+        /* Q1: What is Flexbox and when to use it? */
+        /* A: One-dimensional layout method for arranging items in rows or columns */
+
+        .flex-container {
+            display: flex;
+            border: 2px solid #333;
+            margin: 10px 0;
+            min-height: 100px;
+        }
+
+        .flex-item {
+            background: #f0f0f0;
+            border: 1px solid #999;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        /* Q2: What's the difference between justify-content and align-items? */
+        /* A: justify-content aligns along main axis, align-items along cross axis */
+
+        .justify-center {
+            justify-content: center; /* horizontal centering */
+        }
+
+        .align-center {
+            align-items: center; /* vertical centering */
+        }
+
+        .center-both {
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Q3: What does flex: 1 mean? */
+        /* A: flex-grow: 1, flex-shrink: 1, flex-basis: 0% - takes available space */
+
+        .flex-1 {
+            flex: 1; /* grows to fill available space */
+        }
+
+        .flex-2 {
+            flex: 2; /* takes twice the space of flex: 1 */
+        }
+
+        /* Q4: How to reverse flex direction? */
+        .flex-row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        .flex-column {
+            flex-direction: column;
+        }
+
+        /* Q5: What's the difference between flex-wrap: wrap and nowrap? */
+        .flex-wrap {
+            flex-wrap: wrap; /* items wrap to next line */
+        }
+
+        .flex-nowrap {
+            flex-wrap: nowrap; /* items stay on one line (default) */
+        }
+
+        /* Q6: How to center content both horizontally and vertically? */
+        .perfect-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            border: 2px solid #333;
+        }
+
+        /* Q7: What does align-self do? */
+        .align-self-start {
+            align-self: flex-start; /* overrides parent's align-items */
+        }
+
+        .align-self-end {
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <h3>Basic Flexbox</h3>
+    <div class="flex-container">
+        <div class="flex-item">Item 1</div>
+        <div class="flex-item">Item 2</div>
+        <div class="flex-item">Item 3</div>
+    </div>
+
+    <h3>Justify Content (Horizontal)</h3>
+    <div class="flex-container justify-center">
+        <div class="flex-item">Centered</div>
+        <div class="flex-item">Items</div>
+    </div>
+
+    <h3>Align Items (Vertical)</h3>
+    <div class="flex-container align-center">
+        <div class="flex-item">Vertically</div>
+        <div class="flex-item">Centered</div>
+    </div>
+
+    <h3>Flex Grow</h3>
+    <div class="flex-container">
+        <div class="flex-item flex-1">Flex 1</div>
+        <div class="flex-item flex-2">Flex 2</div>
+        <div class="flex-item flex-1">Flex 1</div>
+    </div>
+
+    <h3>Flex Direction</h3>
+    <div class="flex-container flex-row-reverse">
+        <div class="flex-item">3</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">1</div>
+    </div>
+
+    <div class="flex-container flex-column">
+        <div class="flex-item">Column 1</div>
+        <div class="flex-item">Column 2</div>
+    </div>
+
+    <h3>Perfect Centering</h3>
+    <div class="perfect-center">
+        <div class="flex-item">Perfectly Centered</div>
+    </div>
+
+    <h3>Align Self</h3>
+    <div class="flex-container align-center">
+        <div class="flex-item align-self-start">Top</div>
+        <div class="flex-item">Center</div>
+        <div class="flex-item align-self-end">Bottom</div>
+    </div>
+</body>
+</html> 
