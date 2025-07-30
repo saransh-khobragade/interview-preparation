@@ -1,4 +1,4 @@
-"""
+/*
 You are given two strings word1 and word2.
 Merge the strings by adding letters in alternating order,
 starting with word1. If a string is longer than the other, 
@@ -6,21 +6,20 @@ append the additional letters onto the end of the merged string.
 Return the merged string.
 Input: word1 = "abc", word2 = "pqr"
 Output: "apbqcr"
-"""
-
-def merge_alternately(word1: str, word2: str) -> str:
-    result = ''
-    length = max(len(word1), len(word2))
-    
-    for i in range(length):
-        if i < len(word1):
+ */
+function mergeAlternately(word1, word2){
+    let result = ''
+    const len = word1.length > word2.length ? word1.length : word2.length
+    for (let i = 0; i < len; i++) {
+        if (i < word1.length) {
             result += word1[i]
-        if i < len(word2):
+        }
+        if (i < word2.length) {
             result += word2[i]
-    
+        }
+    }
     return result
+};
 
-
-# Test the function
-if __name__ == "__main__":
-    print(merge_alternately("abc", "pqr")) 
+// Test the function
+console.log(mergeAlternately("abcd", "pqr"))

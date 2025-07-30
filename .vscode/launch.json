@@ -5,6 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Node",
+            "runtimeExecutable": "node",
+            "program": "${file}",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "TypeScript",
@@ -20,16 +30,6 @@
             "internalConsoleOptions": "neverOpen",
             "restart": false,
             "autoAttachChildProcesses": true
-        },
-        {
-            "name": "Node",
-            "runtimeExecutable": "node",
-            "program": "${file}",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "node"
         },
         {
             "name": "Python Debugger: Current File",
